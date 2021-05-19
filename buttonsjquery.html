@@ -18,37 +18,31 @@
 </head>
 <body>
   <div class="container">
-    <h1>Buttonzähler - Demo</h1>
-    <div class="row" onclick="countAll()">
+    <h1>Buttonzähler - Demo in jquery</h1>
+    <div class="row">
       <div class="col-sm-4 btnCounter">0</div>
       <div class="col-sm-4 btnCounter">0</div>
       <div class="col-sm-4 btnCounter">0</div>
     </div>
     <h2>Gesamtzähler: <span id="totalCount">0</span></h2>
   </div>
+
+
+  <script src="js/jquery-1.12.0.js"></script>
   <script type="text/javascript">
-    window.addEventListener('load', setup)
-
-    function setup(){
-      var btns = document.getElementsByClassName('btnCounter')
-      for (var i=0; i < btns.length; i++){
-        btns[i].addEventListener('click', count)
-      }
-    }
-
-    function count(){
-      var zahl = Number(event.target.innerText)
-      event.target.innerText = zahl+1
-    }
-
-    function countAll(){
-      var zahl = Number(document.getElementById('totalCount').innerText)
-      document.getElementById('totalCount').innerText = zahl + 1;
-    }
+    $(document).ready(function(){
+      var totalCounter = 0;
+      $('.btnCounter').on('click', function(){
+        var currentValue = $(this).text()
+        $(this).text(1+Number(currentValue))
+        totalCounter++
+        $("#totalCount").text(totalCounter);
+      });
+    });
 
   </script>
 
-  
+
 
 </body>
 </html>

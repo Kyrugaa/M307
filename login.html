@@ -1,0 +1,84 @@
+  <!doctype html>
+<html lang="en">
+<head>
+<title>Bootstrap Horizontal Form</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <style media="screen">
+    .error-message{
+      display: none;
+      color: red;
+    }
+    .input.is-invalid+.error-message{
+      display: block;
+    }
+  </style>
+
+<div class="container">
+	<h2>Bootstrap Horizontal Form</h2>
+	<form id="registration-form">
+		<div class="form-group">
+			<label for="Username" class="col-md-2 control-label">Username</label>
+			<div class="col-md-10">
+				<input type="text" class="form-control" name="Email" id="email" placeholder="Email">
+        <p class="error-message">Email nicht gueltig</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="Password" class="col-md-2 control-label">Password</label>
+			<div class="col-md-10">
+				<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+			</div>
+		</div>
+		<div class="form-group">
+		   <div class="col-md-offset-2 col-md-10">
+				<button type="submit" class="btn btn-primary">Login</button>
+        <button type="reset" class="btn btn-primary">Reset</button>
+		   </div>
+		</div>
+	  </form>
+
+    <script type="text/javascript">
+      document.getElementById("registration-form").addEventListener(
+      'submit', function(){
+        console.log("executing registration form submit event");
+        if(document.getElementById('email').value.length < 3 || document.getElementById('email').value.indexof("@") < 1){
+          event.stopPropagation()
+          event.preventDefault()
+          alert("Email ungueltig")
+        }
+        if(passwd.lenght < 3){
+          alert("Passwort zu kurz")
+          event.stopPropagation()
+          event.preventDefault()
+          document.getElementById('email').addClass(' has error')
+        }
+        else{
+          console.log("Email gültig")
+        }
+        if(dokument.getElementsByClassName('is-invalid').length > 0){
+          event.stopPropagation()
+          event.preventDefault()
+        }
+      });
+
+    </script>
+    <script type="text/javascript">
+    window.addEventListener('load', function(){
+      if (document.URL.indexOf('?')>-1){
+        var keyValues =  document.URL.split('?')[1].split('&')
+        for (const kv of keyValues){
+          console.log("GET Parameter: "+kv.split('=')[0]+" Wert: "+kv.split('=')[1])
+        }
+      } else {
+        console.log("keine GET Parameter gefunden")
+      }
+    })
+  </script>
+</div>
+</body>
+</html>

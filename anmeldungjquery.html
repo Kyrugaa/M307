@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/jquery-1.12.0.js"></script>
+  <script src="js/formeval_jq"></script>
+
+
+  <style media="screen">
+    input[type=radio]{
+      margin: 0 5px 0 10px;
+    }
+    form button{
+      margin-left: 5px;
+    }
+    input.is-invalid {
+      border: 3px solid red;
+    }
+    .error-message {
+      display: none;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">M307 - Demopage</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="anmeldung.html">Ameldung (JS)</a></li>
+      <li><a href="buttons.html">Buttons (JS)</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
+  <div class="container">
+    <h1>Anmeldung</h1>
+    <form action="" id="anmeldung" class="form-horizontal" method="GET">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" class="form-control">
+        <p class="error-message">Email ungültig</p>
+      </div>
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input type="password" id="passwd" name="passwd"  class="form-control">
+        <p class="error-message">Passwort ungültig</p>
+      </div>
+      <div class="form-group">
+        <label for="password2">Passwort wiederholen</label>
+        <input type="password" id="passwd2" name="passwd"  class="form-control">
+        <p class="error-message">Passwort ungültig</p>
+      </div>
+      <div class="form-check-inline">
+        <label>Über 16 Jahre</label>
+        <input type="radio" name="alter" id="alter_nein" value="false">
+        <label for="alter_nein" class="control-label">
+          Nein
+        </label>
+
+        <input type="radio" name="alter" id="alter_ja" value="true">
+        <label for="alter_ja" class="control-label">
+          Ja
+        </label>
+
+      </div>
+      <div class="form-inline-check">
+        <label for="selection">Bitte auswählen</label>
+        <select name="" id="selection">
+          <option value="a">alpha</option>
+          <option value="b">beta</option>
+          <option value="g">guggus</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-danger pull-right" type="reset">Löschen</button>
+        <button class="btn btn-primary pull-right" type="submit">Senden</button>
+      </div>
+    </form>
+  </div>
+
+
+    <script src="js/jquery-1.12.0.js"></script>
+
+  <script>
+  $(document).ready(function(){
+
+    //$('#email').blur(checkEmail)
+    //$('#passwd').blur(checkPasswdLength)
+
+    $('#anmeldung').on('submit', function(){
+      checkEmail()
+      checkPasswdLength()
+      passwordsEqual()
+
+      if ($('.has-error').length > 0){
+        event.stopPropagation()
+        event.preventDefault()
+      } else {
+        alert("sending form data now")
+      }
+    })
+
+    var checkEmail = function(){
+      var email =$('#email').val()
+      if (email.length < 4 || email.search('@')<1){
+        $('#email').addClass('has-error')
+      } else {
+        $('#email').removeClass('has-error')
+      }
+    }
+
+    var checkPasswdLength = function(){
+      if ($('#passwd').val().length < 5){
+        $('#passwd').addClass('has-error')
+        $('#passwd').next()
+          .text("Passwort zu kurz")
+          .css('display','block')
+      } else {
+        $('#passwd').removeClass('has-error')
+        $('#passwd').next().css('display','none')
+      }
+    }
+
+    var passwordsEqual = function(){
+      if ($('#passwd').val()!=$('#passwd2').val()){
+        $('#passwd2').addClass('has-error')
+        $('#passwd2').next()
+          .text("Passwörter stimmen nicht überein")
+          .css('display','block')
+      } else {
+        $('#passwd2').removeClass('has-error')
+        $('#passwd2').next().css('display','none')
+      }
+    }
+  })
+  </script>
+
+
+</body>
+</html>

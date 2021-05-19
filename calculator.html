@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+  </head>
+  <body>
+
+    <h1>Aufgabe Taschenrechner</h1>
+
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="Num1" id="num1" placeholder="Num1">
+    </div>
+
+    <select id="operator" name="">
+      <option id="plus" value="">+</option>
+      <option id="minus" value="">-</option>
+      <option id="multiply" value="">*</option>
+      <option id="devide" value="">/</option>
+
+    </select><br>
+
+    <div class="col-md-10">
+      <input type="text" class="form-control" name="Num1" id="num2" placeholder="Num2">
+
+    <div class="form-group">
+  		   <div class="col-md-offset-2 col-md-10">
+  				<button type="submit" class="btn btn-primary">=</button>
+          <button type="reset" class="btn btn-primary">Reset</button>
+  		   </div>
+  	</div><br>
+
+    <h4>Resultat: </h4>
+    <div>
+      <span id="result">0</span>
+    </div><br>
+
+
+    <script>
+
+        document.getElementsByClassName('operator').addEventListener
+        ('calculate'), function(){
+          switch ('result') {
+            case plus: num1 + num2; break;
+            case minus: num1 - num2; break;
+            case multiply: num1 * num2; break;
+            case devide: num1 / num2; break;
+            default:
+
+          }
+        });
+
+
+    </script>
+  </body>
+</html>

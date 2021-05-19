@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <style media="screen">
+    input[type=radio]{
+      margin: 0 5px 0 10px;
+    }
+    form button{
+      margin-left: 5px;
+    }
+    input.is-invalid {
+      border: 3px solid red;
+    }
+    .error-message {
+      display: none;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">M307 - Demopage</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="anmeldung.html">Ameldung (JS)</a></li>
+      <li><a href="buttons.html">Buttons (JS)</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
+  <div class="container">
+    <h1>Anmeldung</h1>
+    <form action="" id="anmeldung" class="form-horizontal" method="GET">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" class="form-control">
+        <p class="error-message">Email ungültig</p>
+      </div>
+      <div class="form-group">
+        <label for="password">Passwort</label>
+        <input type="password" id="passwd" name="passwd"  class="form-control">
+        <p class="error-message">Passwort ungültig</p>
+      </div>
+      <div class="form-check-inline">
+        <label>Über 16 Jahre</label>
+        <input type="radio" name="alter" id="alter_nein" value="false">
+        <label for="alter_nein" class="control-label">
+          Nein
+        </label>
+
+        <input type="radio" name="alter" id="alter_ja" value="true">
+        <label for="alter_ja" class="control-label">
+          Ja
+        </label>
+
+      </div>
+      <div class="form-inline-check">
+        <label for="selection">Bitte auswählen</label>
+        <select name="" id="selection">
+          <option value="a">alpha</option>
+          <option value="b">beta</option>
+          <option value="g">guggus</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-danger pull-right" type="reset">Löschen</button>
+        <button class="btn btn-primary pull-right" type="submit">Senden</button>
+      </div>
+    </form>
+  </div>
+  <script type="text/javascript">
+
+  var setup = function(){
+      checkGetParams();
+      document.getElementById('anmeldung').addEventListener('submit', checkForm);
+  }
+
+  var checkForm = function(){
+    var email = document.getElementById('email').value
+    var passwd = document.getElementById('passwd').value
+
+    if (email.length < 3 || email.search('@') < 1){
+      document.getElementById('email').classList.add('is-invalid')
+      document.getElementById('email').nextElementSibling.style.display="block"
+    } else {
+      document.getElementById('email').classList.remove('is-invalid')
+      document.getElementById('email').nextElementSibling.style.display="none"
+    }
+    if (passwd.length < 3){
+      document.getElementById('passwd').classList.add('is-invalid')
+      document.getElementById('passwd').nextElementSibling.style.display="block"
+    } else {
+      {
+        document.getElementById('passwd').classList.remove('is-invalid')
+        document.getElementById('passwd').nextElementSibling.style.display="none"
+      }
+    }
+
+    if (document.getElementsByClassName('is-invalid').length > 0){
+      event.stopPropagation()
+      event.preventDefault()
+    }
+
+  }
+
+  var checkGetParams = function(){
+    if (document.URL.indexOf('?')>-1){
+      var keyValues =  document.URL.split('?')[1].split('&')
+      for (const kv of keyValues){
+        var key =kv.split('=')[0]
+        var value =kv.split('=')[1]
+        console.log("GET Parameter: "+key+" Wert: "+value)
+      }
+    } else {
+      console.log("keine GET Parameter gefunden")
+    }
+  }
+
+  window.addEventListener('load', setup)
+
+  </script>
+</body>
+</html>
