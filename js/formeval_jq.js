@@ -1,7 +1,14 @@
+
 $(document).ready(function(){
 
   //$('#email').blur(checkEmail)
   //$('#passwd').blur(checkPasswdLength)
+
+  jQuery.validator.addMethod("checkZipCode", function (value, element) {
+    return this.optional(element) || /^([1-9][0-9]{3}$)/.test(value);
+  },
+   "Postleitzahl ungültig (auf diesem Planet)");
+  })
 
   $('#anmeldung').on('submit', function(){
     checkEmail()

@@ -42,7 +42,7 @@
 </nav>
   <div class="container">
     <h1>Anmeldung</h1>
-    <form action="" id="anmeldung" class="form-horizontal" method="GET">
+    <form action="php/ajax_handler.php" id="anmeldung" class="form-horizontal" method="GET">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" id="email" name="email" class="form-control">
@@ -55,7 +55,7 @@
       </div>
       <div class="form-group">
         <label for="password2">Passwort wiederholen</label>
-        <input type="password" id="passwd2" name="passwd"  class="form-control">
+        <input type="password" id="passwd2" name="passwd2"  class="form-control">
         <p class="error-message">Passwort ungültig</p>
       </div>
       <div class="form-check-inline">
@@ -112,8 +112,23 @@
       var email =$('#email').val()
       if (email.length < 4 || email.search('@')<1){
         $('#email').addClass('has-error')
+        $('#email').next().css('display', 'none').text('Ungültige Email')
       } else {
         $('#email').removeClass('has-error')
+        $('#email').next().css('display', 'none')
+        $get({
+          url: "php/ajax_handler",
+          data: {
+            email: $('email').val()
+          },
+          success: function(data, success){
+            console.log("antwort: " + data)
+            if(data == "false"){
+              $('#email').addClass('has-error')
+              $('#email').next().css("display", "block").text("Email already in use.")
+            }
+          }
+        })
       }
     }
 

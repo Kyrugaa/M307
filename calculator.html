@@ -1,56 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Calculator</title>
-  </head>
-  <body>
-
-    <h1>Aufgabe Taschenrechner</h1>
-
-    <div class="col-md-10">
-      <input type="text" class="form-control" name="Num1" id="num1" placeholder="Num1">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <title>Taschenrechner</title>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">M307 - Demopage</a>
     </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="anmeldung.html">Ameldung (JS)</a></li>
+      <li><a href="buttons.html">Buttons (JS)</a></li>
+      <li><a href="calculator.html">Taschenrechner (AJAX)</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <select id="operator" name="">
-      <option id="plus" value="">+</option>
-      <option id="minus" value="">-</option>
-      <option id="multiply" value="">*</option>
-      <option id="devide" value="">/</option>
-
-    </select><br>
-
-    <div class="col-md-10">
-      <input type="text" class="form-control" name="Num1" id="num2" placeholder="Num2">
-
-    <div class="form-group">
-  		   <div class="col-md-offset-2 col-md-10">
-  				<button type="submit" class="btn btn-primary">=</button>
-          <button type="reset" class="btn btn-primary">Reset</button>
-  		   </div>
-  	</div><br>
-
-    <h4>Resultat: </h4>
-    <div>
-      <span id="result">0</span>
-    </div><br>
-
-
-    <script>
-
-        document.getElementsByClassName('operator').addEventListener
-        ('calculate'), function(){
-          switch ('result') {
-            case plus: num1 + num2; break;
-            case minus: num1 - num2; break;
-            case multiply: num1 * num2; break;
-            case devide: num1 / num2; break;
-            default:
-
+<div class="container">
+  <h2>Taschenrechner</h2>
+  <form class="form-inline" id="calc-form">
+    <div class="form-row">
+      <div class="form-group col">
+        <input class="form-control" type="number" id="x1">
+      </div>
+      <div class="form-group col">
+        <select  class="form-control" name="op" id="op">
+          <option value="add"> + </option>
+          <option value="sub"> - </option>
+          <option value="mul"> &dot; </option>
+          <option value="div"> &divide; </option>
+        </select>
+      </div>
+      <div class="form-group col">
+        <input type="number" id="x2"  class="form-control">
+      </div>
+      <div class="form-group col">
+        <button class="btn btn-primary" type="submit"> = </button>
+      </div>
+      <div class="form-group col">
+        <span id="result"></span>
+      </div>
+    </div>
+  </form>
+  <hr>
+</div>
+<script src="js/jquery-1.12.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#calc-form').on('submit', function(){
+        $.get({
+          url: "php/calc.php",
+          data: {
+            x1: $('#1').val(),
+            x2: $('#2').val(),
+            op: $('#op').val(),
+          },
+          success: function(data, success){
+            console.log("data: " + data)
+            console.log("success: " + success)
+            if(success === "success"){
+              $('#result').text(date)
+            }
           }
-        });
+        })
 
-
-    </script>
-  </body>
+        event.stopPropagation()
+        event.preventDefault()
+    })
+  })
+</script>
+</body>
 </html>
